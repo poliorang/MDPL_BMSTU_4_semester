@@ -2,8 +2,6 @@ public convert_shex
 
 extrn num: word
 
-
-
 DATASEG SEGMENT PARA PUBLIC 'DATA'
     out_msg db 'Converted number: $'
     hexnum db 4 dup('0'), '$'
@@ -88,7 +86,6 @@ convert_shex proc near
     int 21h
 
     call to_shex
-
     call print_shex
 
     ret

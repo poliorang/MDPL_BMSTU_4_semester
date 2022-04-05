@@ -17,7 +17,7 @@ DATASEG SEGMENT PARA PUBLIC 'DATA'
              db "3. Convert to signed hexidemical and print", 10, 13
              db "4. Exit", 10, 10, 13
              db "Input action: $"
-
+    ; каждая переменная по 2 байта (тк dw - word - 2 байта)
     menu_ptr dw input_number, convert_ubin, convert_shex, exit
     mess_incorrect_res DB 10, 'Incorrect result', 10, '$'
 DATASEG ENDS
@@ -48,10 +48,10 @@ input_action:
     ret
 
 
-exit proc near
+exit proc near      ; proc - начало процедуры (логично)
     mov ax, 4c00h
     int 21h
-exit endp
+exit endp           ; endp - окончание процедуры
 
 
 main:
@@ -72,7 +72,10 @@ main:
 
         add bx, "1"     ; обратно в код
 
-        cmp bx, "7"     ; не больше ли 4ки (хз, почему так это работает)
+
+        ; не больше ли 7, потому что 4 переменных в menu_ptr по 2 байта
+        ; bx может принимать значения 0, 2, 4, 6
+        cmp bx, "7"     ; не больше ли 4ки
         jg call_menu    ; если больше, скипаем, опять меню
 
         sub bx, "1"     ; обратно в цифру

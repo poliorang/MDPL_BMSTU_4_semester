@@ -36,7 +36,6 @@ to_ubin:
 
 
 print_ubin:
-
     mov cx, 16
     mov bx, 0
 
@@ -57,7 +56,6 @@ convert_ubin proc near
     int 21h
 
     call to_ubin
-
     call print_ubin
 
     ret
